@@ -48,7 +48,6 @@ const Location = () => {
       .catch(err => {
         const {code, message} = err;
         console.log('message', message);
-        console.log('err', err);
         if (code === 'CANCELLED') {
           console.log('Location cancelled by user or by another request');
         }
@@ -68,7 +67,7 @@ const Location = () => {
 
   useEffect(() => {
     RequestLocation();
-  }, [location]);
+  }, []);
   return (
     <View style={styles().container}>
       <Text style={styles().welcome}>Welcome to React Native!</Text>
