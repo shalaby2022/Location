@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -15,8 +15,8 @@ const Location = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [region, setRegion] = useState({
-    latitude: 37.4226711,
-    longitude: -122.0849872,
+    latitude: 31.2463624,
+    longitude: 29.9741573,
     latitudeDelta: 0.15,
     longitudeDelta: 0.15,
   });
@@ -48,37 +48,39 @@ const Location = () => {
       .catch(err => {
         const {code, message} = err;
         console.log('message', message);
+        console.log('err', err);
         if (code === 'CANCELLED') {
-          Alert.alert('Location cancelled by user or by another request');
+          console.log('Location cancelled by user or by another request');
         }
         if (code === 'UNAVAILABLE') {
-          Alert.alert('Location service is disabled or unavailable');
+          console.log('Location service is disabled or unavailable');
         }
         if (code === 'TIMEOUT') {
-          Alert.alert('Location request timed out');
+          console.log('Location request timed out');
         }
         if (code === 'UNAUTHORIZED') {
-          Alert.alert('Authorization denied');
+          console.log('Authorization denied');
         }
         setLoading(false);
         setLocation(null);
       });
   };
 
+  useEffect(() => {
+    RequestLocation();
+  }, [location]);
   return (
     <View style={styles().container}>
       <Text style={styles().welcome}>Welcome to React Native!</Text>
       <Text style={styles().instructions}>
         To get location, press the button:
       </Text>
-      {/* <View style={styles().button}> */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         disabled={loading}
         onPress={RequestLocation}
         style={styles().button}>
         <Text style={styles().btnText}>Get Location</Text>
-      </TouchableOpacity>
-      {/* </View> */}
+      </TouchableOpacity> */}
       {loading ? <ActivityIndicator /> : null}
       {location ? (
         <Text style={styles().location}>{JSON.stringify(location)}</Text>
