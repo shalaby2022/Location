@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import GetLocation from 'react-native-get-location';
 import Geocoder from 'react-native-geocoding';
@@ -68,23 +62,15 @@ const Location = () => {
   useEffect(() => {
     RequestLocation();
   }, []);
+
   return (
     <View style={styles().container}>
       <Text style={styles().welcome}>Welcome to React Native!</Text>
-      <Text style={styles().instructions}>
-        To get location, press the button:
-      </Text>
-      {/* <TouchableOpacity
-        disabled={loading}
-        onPress={RequestLocation}
-        style={styles().button}>
-        <Text style={styles().btnText}>Get Location</Text>
-      </TouchableOpacity> */}
       {loading ? <ActivityIndicator /> : null}
       {location ? (
         <Text style={styles().location}>{JSON.stringify(location)}</Text>
       ) : null}
-      <View style={styles().mapContainer}>
+      <View style={styles().mapWrapper}>
         <MapView
           style={styles().map}
           region={region}

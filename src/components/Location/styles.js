@@ -4,7 +4,6 @@ export default () =>
   StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#F5FCFF',
     },
@@ -12,13 +11,7 @@ export default () =>
       fontSize: 22,
       fontWeight: 'bold',
       textAlign: 'center',
-      margin: 10,
-    },
-    instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 10,
-      fontSize: 16,
+      marginVertical: 20,
     },
     location: {
       color: '#333333',
@@ -42,8 +35,7 @@ export default () =>
       fontWeight: 'bold',
       color: '#00f',
     },
-    mapContainer: {
-      backgroundColor: 'transparent',
+    mapWrapper: {
       height: 300,
       width: '95%',
       marginVertical: 10,
