@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {View, Text, Dimensions, Image} from 'react-native';
 import styles from './styles';
 import MapView, {Marker} from 'react-native-maps';
-const {width, height} = Dimensions.get('window');
-const ASPECT_RATIO = width / height;
 
 const Locations = () => {
   const [location, setLocation] = useState(null);
