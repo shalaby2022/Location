@@ -44,7 +44,7 @@ export default () =>
       color: '#00f',
     },
     mapWrapper: {
-      height: 300,
+      height: 450,
       width: '95%',
       marginVertical: 10,
       borderRadius: 6,
@@ -52,6 +52,6 @@ export default () =>
     map: {
       borderRadius: 6,
       width: '100%',
-      height: '80%',
+      height: '100%',
     },
   });

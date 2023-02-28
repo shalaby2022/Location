@@ -18,12 +18,28 @@ const ASPECT_RATIO = width / height;
 const Location = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [region, setRegion] = useState({
-    latitude: 31.2463624,
-    longitude: 29.9741573,
-    longitudeDelta: 0.1 * ASPECT_RATIO,
-    latitudeDelta: 1,
-  });
+  const [region, setRegion] = useState(null);
+  const [newRegion, setNewRegion] = useState(null);
+
+  const onDragEnd = e => {
+    setLoading(true);
+    setNewRegion({
+      longitude: e.nativeEvent.coordinate.longitude,
+      latitude: e.nativeEvent.coordinate.latitude,
+      longitudeDelta: 0.2 * ASPECT_RATIO,
+      latitudeDelta: 0.15,
+    });
+    Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
+    Geocoder.from({
+      lat: e.nativeEvent.coordinate.latitude,
+      lng: e.nativeEvent.coordinate.longitude,
+    })
+      .then(json => {
+        setLocation(json.results[0].formatted_address);
+      })
+      .catch(err => console.log('Error', err));
+    setLoading(false);
+  };
 
   const RequestLocation = () => {
     setLoading(true);
@@ -38,8 +54,8 @@ const Location = () => {
         setRegion({
           latitude,
           longitude,
-          longitudeDelta: 0.1 * ASPECT_RATIO,
-          latitudeDelta: 1,
+          longitudeDelta: 0.2 * ASPECT_RATIO,
+          latitudeDelta: 0.15,
         });
         Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
         Geocoder.from({lat: latitude, lng: longitude})
@@ -118,9 +134,13 @@ const Location = () => {
           region={region}
           zoomEnabled={true}
           scrollEnabled={true}
-          showsScale={true}
-          onMarkerDragEnd={RequestLocation}>
-          <Marker coordinate={region} draggable={true} />
+          showsScale={true}>
+          <Marker
+            coordinate={region}
+            draggable
+            onDragEnd={e => onDragEnd(e)}
+            // image={{uri: 'address'}}
+          />
         </MapView>
       </View>
     </View>
