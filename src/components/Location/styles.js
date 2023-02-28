@@ -11,8 +11,8 @@ export default () =>
     welcome: {
       fontSize: 22,
       fontWeight: 'bold',
-      textAlign: 'center',
-      margin: 10,
+      textAlign: 'center', 
+      marginTop:120,
     },
     instructions: {
       textAlign: 'center',
@@ -44,13 +44,13 @@ export default () =>
     },
     mapContainer: {
       backgroundColor: 'transparent',
-      height: 300,
+      height: '90%',
       width: '95%',
       marginVertical: 10,
     },
     map: {
       borderRadius: 6,
       width: '100%',
-      height: '100%',
+      height: '80%',
     },
   });
