@@ -9,10 +9,10 @@ const Location = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [region, setRegion] = useState({
-    latitude: 31.2463624,
-    longitude: 29.9741573,
-    latitudeDelta: 0.15,
-    longitudeDelta: 0.15,
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
   });
 
   const RequestLocation = () => {
@@ -29,7 +29,7 @@ const Location = () => {
           latitude,
           longitude,
           latitudeDelta: 0.015,
-          longitudeDelta: 0.012,
+          longitudeDelta: 0.0121,
         });
         Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
         Geocoder.from({lat: latitude, lng: longitude})
