@@ -3,23 +3,43 @@ import {
   View,
   Text,
   ActivityIndicator,
-  Alert,
+  Dimensions,
+  Platform,
+  PermissionsAndroid,
   TouchableOpacity,
 } from 'react-native';
 import styles from './styles';
 import GetLocation from 'react-native-get-location';
 import Geocoder from 'react-native-geocoding';
 import MapView, {Marker} from 'react-native-maps';
+const {width, height} = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
 
 const Location = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [region, setRegion] = useState({
-    latitude: 31.2463624,
-    longitude: 29.9741573,
-    latitudeDelta: 0.15,
-    longitudeDelta: 0.15,
-  });
+  const [region, setRegion] = useState(null);
+  const [newRegion, setNewRegion] = useState(null);
+
+  const onDragEnd = e => {
+    setLoading(true);
+    setNewRegion({
+      longitude: e.nativeEvent.coordinate.longitude,
+      latitude: e.nativeEvent.coordinate.latitude,
+      longitudeDelta: 0.2 * ASPECT_RATIO,
+      latitudeDelta: 0.15,
+    });
+    Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
+    Geocoder.from({
+      lat: e.nativeEvent.coordinate.latitude,
+      lng: e.nativeEvent.coordinate.longitude,
+    })
+      .then(json => {
+        setLocation(json.results[0].formatted_address);
+      })
+      .catch(err => console.log('Error', err));
+    setLoading(false);
+  };
 
   const RequestLocation = () => {
     setLoading(true);
@@ -34,8 +54,8 @@ const Location = () => {
         setRegion({
           latitude,
           longitude,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.012,
+          longitudeDelta: 0.2 * ASPECT_RATIO,
+          latitudeDelta: 0.15,
         });
         Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
         Geocoder.from({lat: latitude, lng: longitude})
@@ -65,34 +85,62 @@ const Location = () => {
       });
   };
 
+  const getPermissions = async () => {
+    if (Platform.OS == 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: 'Example App',
+            message: 'Example App access to your location ',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          RequestLocation();
+        } else {
+          alert('Location permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      RequestLocation();
+    }
+  };
+
   useEffect(() => {
-    RequestLocation();
+    getPermissions();
   }, []);
+
   return (
     <View style={styles().container}>
       <Text style={styles().welcome}>Welcome to React Native!</Text>
       <Text style={styles().instructions}>
         To get location, press the button:
       </Text>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         disabled={loading}
         onPress={RequestLocation}
         style={styles().button}>
         <Text style={styles().btnText}>Get Location</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
       {loading ? <ActivityIndicator /> : null}
       {location ? (
         <Text style={styles().location}>{JSON.stringify(location)}</Text>
       ) : null}
-      <View style={styles().mapContainer}>
+      <View style={styles().mapWrapper}>
         <MapView
           style={styles().map}
           region={region}
           zoomEnabled={true}
           scrollEnabled={true}
-          showsScale={true}
-          onMarkerDragEnd={RequestLocation}>
-          <Marker coordinate={region} draggable={true} />
+          showsScale={true}>
+          <Marker
+            coordinate={region}
+            draggable
+            onDragEnd={e => onDragEnd(e)}
+            // image={{uri: 'address'}}
+          />
         </MapView>
       </View>
     </View>

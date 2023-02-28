@@ -53,6 +53,10 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs to get your location...</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This is the plist item for NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This is the plist item for NSLocationAlwaysUsageDescription</string>
 	<!-- <true/> -->
 </dict>
 </plist>
