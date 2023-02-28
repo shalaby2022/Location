@@ -1,18 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Dimensions,
+  Platform,
+  PermissionsAndroid,
+  TouchableOpacity,
+} from 'react-native';
 import styles from './styles';
 import GetLocation from 'react-native-get-location';
 import Geocoder from 'react-native-geocoding';
 import MapView, {Marker} from 'react-native-maps';
+const {width, height} = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
 
 const Location = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [region, setRegion] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121,
+    latitude: 31.2463624,
+    longitude: 29.9741573,
+    longitudeDelta: 0.1 * ASPECT_RATIO,
+    latitudeDelta: 1,
   });
 
   const RequestLocation = () => {
@@ -28,8 +38,8 @@ const Location = () => {
         setRegion({
           latitude,
           longitude,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
+          longitudeDelta: 0.1 * ASPECT_RATIO,
+          latitudeDelta: 1,
         });
         Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
         Geocoder.from({lat: latitude, lng: longitude})
@@ -59,13 +69,45 @@ const Location = () => {
       });
   };
 
+  const getPermissions = async () => {
+    if (Platform.OS == 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: 'Example App',
+            message: 'Example App access to your location ',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          RequestLocation();
+        } else {
+          alert('Location permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      RequestLocation();
+    }
+  };
+
   useEffect(() => {
-    RequestLocation();
+    getPermissions();
   }, []);
 
   return (
     <View style={styles().container}>
       <Text style={styles().welcome}>Welcome to React Native!</Text>
+      <Text style={styles().instructions}>
+        To get location, press the button:
+      </Text>
+      <TouchableOpacity
+        disabled={loading}
+        onPress={RequestLocation}
+        style={styles().button}>
+        <Text style={styles().btnText}>Get Location</Text>
+      </TouchableOpacity>
       {loading ? <ActivityIndicator /> : null}
       {location ? (
         <Text style={styles().location}>{JSON.stringify(location)}</Text>

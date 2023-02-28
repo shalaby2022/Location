@@ -12,6 +12,14 @@ export default () =>
       fontWeight: 'bold',
       textAlign: 'center',
       marginVertical: 20,
+      textAlign: 'center',
+      marginTop: 120,
+    },
+    instructions: {
+      textAlign: 'center',
+      color: '#333333',
+      marginBottom: 10,
+      fontSize: 16,
     },
     location: {
       color: '#333333',
@@ -37,12 +45,16 @@ export default () =>
     },
     mapWrapper: {
       height: 300,
+    },
+    mapContainer: {
+      backgroundColor: 'transparent',
+      height: '90%',
       width: '95%',
       marginVertical: 10,
     },
     map: {
       borderRadius: 6,
       width: '100%',
-      height: '100%',
+      height: '80%',
     },
   });
