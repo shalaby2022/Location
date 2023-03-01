@@ -11,7 +11,7 @@ target 'AwesomeProject' do
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
   #location tracking import
-  pod 'react-native-location', :path => '../node_modules/react-native-location/react-native-location.podspec'
+  # pod 'react-native-location', :path => '../node_modules/react-native-location/react-native-location.podspec'
   config = use_native_modules!
 
   # Flags change depending on the env values.
