@@ -1,168 +1,143 @@
-import React, {useEffect, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
-  SafeAreaView,
-  ScrollView,
+  Image,
+  Platform,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
-// import RNLocation from 'react-native-location';
 import styles from './styles';
-import moment from 'moment';
+import MapView, {
+  AnimatedRegion,
+  Marker,
+  MarkerAnimated,
+  Polyline,
+} from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
+
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.76;
+const LATITUDE_DELTA = 0.2;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LATITUDE = 37.58207437;
+const LONGITUDE = -122.404453;
 
 const Tracking = () => {
-  const [location, setLocation] = useState(null);
-  const [locSubscript, setLocaSubscript] = useState(null);
+  const markerRef = useRef();
+  const [subscriptionId, setSubscriptionId] = useState(null);
+  const [state, setState] = useState({
+    latitude: LATITUDE,
+    longitude: LONGITUDE,
+    routeCoordinates: [],
+    prevLatLng: {},
+    coordinate: new AnimatedRegion({
+      latitude: LATITUDE,
+      longitude: LONGITUDE,
+      latitudeDelta: 0,
+      longitudeDelta: 0,
+    }),
+  });
 
+  const initialRegion = {
+    latitude: state.latitude,
+    longitude: state.longitude,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  };
+
+  const startTracking = () => {
+    const {coordinate} = state;
+    const watchID = Geolocation.watchPosition(
+      position => {
+        const {routeCoordinates} = state;
+        const {latitude, longitude} = position.coords;
+        const newCoordinate = {
+          latitude,
+          longitude,
+        };
+
+        console.log('new', newCoordinate);
+        if (Platform.OS === 'android') {
+          if (markerRef.current) {
+            markerRef.current.animateMarkerToCoordinate(newCoordinate, 1500);
+          }
+        } else {
+          coordinate.timing(newCoordinate).start();
+        }
+
+        setState({
+          latitude,
+          longitude,
+          routeCoordinates: [...routeCoordinates, newCoordinate],
+          prevLatLng: newCoordinate,
+        });
+
+        setSubscriptionId(watchID);
+      },
+      error => console.log(error),
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000,
+        distanceFilter: 10,
+      },
+    );
+  };
+
+  const clearWatch = () => {
+    subscriptionId !== null && Geolocation.clearWatch(subscriptionId);
+    setSubscriptionId(null);
+  };
+
+  console.log('routeCoordinates', state.routeCoordinates);
   // useEffect(() => {
-  //   RNLocation.configure({
-  //     distanceFilter: 1.0,
-  //     interval: 2000,
-  //   });
-  //   const sub = RNLocation.requestPermission({
-  //     ios: 'whenInUse',
-  //     android: {
-  //       detail: 'fine',
-  //       rationale: {
-  //         title: 'We need to access your location',
-  //         message: 'We use your location to show where you are on the map',
-  //         buttonPositive: 'OK',
-  //         buttonNegative: 'Cancel',
-  //       },
-  //     },
-  //   }).then(granted => {
-  //     if (granted) {
-  //       startUpdatingLocation();
-  //     } else {
-  //       console.warn('You canceled access to location');
-  //     }
-  //   });
+  //   startTracking();
+  //   return () => {
+  //     clearWatch();
+  //   };
   // }, []);
 
-  // const startUpdatingLocation = () => {
-  //   const unsubscribe = RNLocation.subscribeToLocationUpdates(locations => {
-  //     console.log('locations', locations);
-  //     setLocation(locations[0]);
-  //     setLocaSubscript(unsubscribe);
-  //   });
-  // };
-
-  // const stopUpdatingLocation = () => {
-  //   locSubscript && locSubscript();
-  //   setLocation(null);
-  // };
-
   return (
-    <ScrollView style={styles().container}>
-      <SafeAreaView style={styles().innerContainer}>
-        <View style={{alignItems: 'center', marginTop: 30}}>
-          <Text style={styles().title}>react-native-location</Text>
-          <TouchableHighlight
-            onPress={() => console.log('hello')}
-            underlayColor="#CCC"
-            activeOpacity={0.8}>
-            <Text style={styles().repoLink}>Hello</Text>
-          </TouchableHighlight>
-        </View>
-
-        <View style={styles().row}>
-          <TouchableHighlight
-            // onPress={startUpdatingLocation}
-            style={[styles().button, {backgroundColor: '#126312'}]}>
-            <Text style={styles().buttonText}>Start</Text>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            // onPress={stopUpdatingLocation}
-            style={[styles().button, {backgroundColor: '#881717'}]}>
-            <Text style={styles().buttonText}>Stop</Text>
-          </TouchableHighlight>
-        </View>
-
-        {location && (
-          <>
-            <View style={styles().row}>
-              <View style={[styles().detailBox, styles().third]}>
-                <Text style={styles().valueTitle}>Course</Text>
-                <Text style={[styles().detail, styles().largeDetail]}>
-                  {location.course}
-                </Text>
-              </View>
-
-              <View style={[styles().detailBox, styles().third]}>
-                <Text style={styles().valueTitle}>Speed</Text>
-                <Text style={[styles().detail, styles().largeDetail]}>
-                  {location.speed}
-                </Text>
-              </View>
-
-              <View style={[styles().detailBox, styles().third]}>
-                <Text style={styles().valueTitle}>Altitude</Text>
-                <Text style={[styles().detail, styles().largeDetail]}>
-                  {location.altitude}
-                </Text>
-              </View>
-            </View>
-
-            <View style={{alignItems: 'flex-start'}}>
-              <View style={styles().row}>
-                <View style={[styles().detailBox, styles().half]}>
-                  <Text style={styles().valueTitle}>Latitude</Text>
-                  <Text style={styles().detail}>{location.latitude}</Text>
-                </View>
-
-                <View style={[styles().detailBox, styles().half]}>
-                  <Text style={styles().valueTitle}>Longitude</Text>
-                  <Text style={styles().detail}>{location.longitude}</Text>
-                </View>
-              </View>
-
-              <View style={styles().row}>
-                <View style={[styles().detailBox, styles().half]}>
-                  <Text style={styles().valueTitle}>Accuracy</Text>
-                  <Text style={styles().detail}>{location.accuracy}</Text>
-                </View>
-
-                <View style={[styles().detailBox, styles().half]}>
-                  <Text style={styles().valueTitle}>Altitude Accuracy</Text>
-                  <Text style={styles().detail}>
-                    {location.altitudeAccuracy}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles().row}>
-                <View style={[styles().detailBox, styles().half]}>
-                  <Text style={styles().valueTitle}>Timestamp</Text>
-                  <Text style={styles().detail}>
-                    {moment(location.timestamp).format('MM-DD-YYYY')}
-                  </Text>
-                </View>
-
-                <View style={[styles().detailBox, styles().half]}>
-                  <Text style={styles().valueTitle}>Date / Time</Text>
-                  <Text style={styles().detail}>
-                    {moment(location.timestamp).format('MM-DD-YYYY h:mm:ss')}
-                    {/* {location.timestamp} */}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles().row}>
-                <View style={[styles().detailBox, styles().full]}>
-                  <Text style={styles().json}>{JSON.stringify(location)}</Text>
-                </View>
-              </View>
-            </View>
-          </>
-        )}
-      </SafeAreaView>
-    </ScrollView>
+    <View style={styles().container}>
+      <Text style={styles().title}>Coords :</Text>
+      {state && <Text style={styles().info}>Latitude: {state.latitude}</Text>}
+      {state && <Text style={styles().info}>Longitude: {state.longitude}</Text>}
+      <MapView
+        style={styles().map}
+        showUserLocation
+        followUserLocation
+        loadingEnabled
+        region={initialRegion}>
+        <Polyline
+          coordinates={state.routeCoordinates}
+          strokeWidth={5}
+          strokeColor="#f00"
+        />
+        <Marker.Animated ref={markerRef} coordinate={state.coordinate}>
+          <Image
+            source={require('../../../android/app/src/main/res/drawable/car.png')}
+            style={{
+              width: 40,
+              height: 40,
+            }}
+            resizeMode="contain"
+          />
+        </Marker.Animated>
+      </MapView>
+      <View style={styles().btnsWrapper}>
+        <TouchableOpacity
+          onPress={() => startTracking()}
+          style={styles().startWrapper}>
+          <Text style={styles().btnTxt}>Start</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => clearWatch()}
+          style={styles().stopWrapper}>
+          <Text style={styles().btnTxt}>Stop</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 

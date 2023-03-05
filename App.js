@@ -9,8 +9,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* <Location /> */}
-      <Locations />
-      {/* <Tracking /> */}
+      {/* <Locations /> */}
+      <Tracking />
       {/* <Trial /> */}
     </SafeAreaView>
   );

@@ -14,22 +14,28 @@ import Geocoder from 'react-native-geocoding';
 import MapView, {Marker} from 'react-native-maps';
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.16;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Location = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [region, setRegion] = useState(null);
-  const [newRegion, setNewRegion] = useState(null);
+  const [region, setRegion] = useState({
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  });
 
   const onDragEnd = e => {
     setLoading(true);
-    setNewRegion({
+    setRegion({
       longitude: e.nativeEvent.coordinate.longitude,
       latitude: e.nativeEvent.coordinate.latitude,
-      longitudeDelta: 0.2 * ASPECT_RATIO,
-      latitudeDelta: 0.15,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
     });
-    Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
+    Geocoder.init('AIzaSyBZQl3WIxVqdz7_8dyQXJDS8QZiQsH0Yso');
     Geocoder.from({
       lat: e.nativeEvent.coordinate.latitude,
       lng: e.nativeEvent.coordinate.longitude,
@@ -37,7 +43,7 @@ const Location = () => {
       .then(json => {
         setLocation(json.results[0].formatted_address);
       })
-      .catch(err => console.log('Error', err));
+      .catch(err => console.log('Error', err?.origin?.error_message));
     setLoading(false);
   };
 
@@ -50,12 +56,11 @@ const Location = () => {
     })
       .then(location => {
         const {longitude, latitude} = location;
-        console.log('location', longitude, latitude);
         setRegion({
           latitude,
           longitude,
-          longitudeDelta: 0.2 * ASPECT_RATIO,
-          latitudeDelta: 0.15,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
         });
         Geocoder.init('AIzaSyCWGeHLTsC6c9V4H85gq5AaZrsTZchLzvU');
         Geocoder.from({lat: latitude, lng: longitude})
@@ -139,7 +144,7 @@ const Location = () => {
             coordinate={region}
             draggable
             onDragEnd={e => onDragEnd(e)}
-            // image={{uri: 'address'}}
+            pinColor="gold"
           />
         </MapView>
       </View>
