@@ -49,7 +49,7 @@ const Tracking = () => {
       const watchID = Geolocation.watchPosition(
         position => {
           const {latitude, longitude, heading} = position.coords;
-          console.log('heading', heading);
+          // console.log('heading', heading);
           const newCoordinate = {
             latitude,
             longitude,
@@ -85,7 +85,7 @@ const Tracking = () => {
       console.log(err.message);
     }
   };
-  console.log('Route', route);
+  // console.log('Route', route);
   const clearWatch = () => {
     subscriptionId !== null && Geolocation.clearWatch(subscriptionId);
     setSubscriptionId(null);
@@ -104,7 +104,7 @@ const Tracking = () => {
         followUserLocation
         loadingEnabled
         region={initialRegion}>
-        <Polyline coordinates={route} strokeWidth={5} />
+        <Polyline coordinates={route} strokeWidth={4} />
         <Marker.Animated
           ref={markerRef}
           coordinate={
