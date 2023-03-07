@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import Background from './src/components/BackgroundTracking';
+import SignIn from './src/components/GoogleSignIn';
 import Location from './src/components/Location';
 import Locations from './src/components/Locations';
 import Tracking from './src/components/Tracking';
@@ -11,7 +11,7 @@ const App = () => {
       {/* <Location /> */}
       {/* <Locations /> */}
       {/* <Tracking /> */}
-      <Background />
+      <SignIn />
     </SafeAreaView>
   );
 };

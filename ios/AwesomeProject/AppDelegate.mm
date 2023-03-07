@@ -18,6 +18,9 @@
 
 #import <react/config/ReactNativeConfig.h>
 
+// #import FirebaseCore
+#import <Firebase.h>
+#import <RNGoogleSignin.h>
 
 @interface AppDelegate () <RCTCxxBridgeDelegate, RCTTurboModuleManagerDelegate> {
   RCTTurboModuleManager *_turboModuleManager;
@@ -32,6 +35,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
   [GMSServices provideAPIKey:@"AIzaSyBZQl3WIxVqdz7_8dyQXJDS8QZiQsH0Yso"];
   RCTAppSetupPrepareApp(application);
 

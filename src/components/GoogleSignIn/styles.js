@@ -8,11 +8,13 @@ export default () =>
     },
     image: {
       height: 200,
+      width: 300,
       justifyContent: 'center',
     },
     wrapper: {
       width: '100%',
-      //   position: 'absolute',
+      backgroundColor: '#eee',
+      borderTopRightRadius: 70,
       flex: 1,
     },
     headerWrapper: {
@@ -62,4 +64,8 @@ export default () =>
       paddingHorizontal: 25,
     },
     socialText: {},
+    googleBtn: {
+      width: 192,
+      height: 48,
+    },
   });
