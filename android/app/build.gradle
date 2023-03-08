@@ -270,6 +270,8 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"  // <-- add this; newer versions should work too
     
+    // facebook sdk for integrating fb with project
+    implementation 'com.facebook.android:facebook-android-sdk: [8,9]'
 
     // firebase analytics
     implementation 'com.google.firebase:firebase-analytics:17.3.0'

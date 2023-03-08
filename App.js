@@ -12,8 +12,8 @@ const App = () => {
       {/* <Location /> */}
       {/* <Locations /> */}
       {/* <Tracking /> */}
-      <SignIn />
-      {/* <FbSignIn /> */}
+      {/* <SignIn /> */}
+      <FbSignIn />
     </SafeAreaView>
   );
 };

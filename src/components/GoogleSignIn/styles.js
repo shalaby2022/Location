@@ -7,16 +7,17 @@ export default () =>
       paddingBottom: 7,
     },
     image: {
-      height: 250,
+      height: 330,
       justifyContent: 'center',
     },
     wrapper: {
       width: '100%',
       height: '100%',
       backgroundColor: '#eee',
-      borderTopRightRadius: 70,
+      borderTopRightRadius: 45,
+      borderTopLeftRadius: 45,
       position: 'absolute',
-      top: 200,
+      top: 250,
     },
     headerWrapper: {
       alignItems: 'center',

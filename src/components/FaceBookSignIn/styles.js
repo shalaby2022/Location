@@ -7,16 +7,17 @@ export default () =>
       paddingBottom: 7,
     },
     image: {
-      height: 250,
+      height: 330,
       justifyContent: 'center',
     },
     wrapper: {
       width: '100%',
       height: '100%',
       backgroundColor: '#eee',
-      borderTopRightRadius: 70,
+      borderTopRightRadius: 45,
+      borderTopLeftRadius: 45,
       position: 'absolute',
-      top: 200,
+      top: 250,
     },
     headerWrapper: {
       alignItems: 'center',
@@ -48,27 +49,29 @@ export default () =>
       alignSelf: 'center',
       paddingHorizontal: 10,
     },
-    socialWrapper: {
-      marginTop: 20,
-      flexDirection: 'row',
-      alignItems: 'center',
-      borderWidth: 1,
-      borderColor: '#ccc',
-      borderRadius: 20,
-      width: '55%',
-      paddingVertical: 8,
+    fbBtnWrapper: {
+      width: '50%',
       alignSelf: 'center',
+      marginVertical: 20,
     },
-    socialImg: {
-      height: 25,
-      width: 25,
-      paddingHorizontal: 25,
+    fbBtn: {
+      width: 200,
+      height: 30,
     },
-    socialText: {},
-    googleBtn: {
-      width: 192,
-      height: 48,
+    userName: {
+      color: '#03f',
+      fontSize: 16,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      paddingVertical: 15,
+    },
+    userImage: {
+      width: 100,
+      height: 100,
+      borderRadius: 50,
+    },
+    userImgWrapper: {
+      width: '30%',
       alignSelf: 'center',
-      marginTop: 20,
     },
   });

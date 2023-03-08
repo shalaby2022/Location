@@ -95,16 +95,6 @@ const SignIn = () => {
           <Text style={styles().infoHeader}>Email:</Text>
           <TextInput style={styles().input} />
         </View>
-        {/* <View style={styles().socialWrapper}>
-          <Image
-            source={require('../../assets/google.png')}
-            resizeMode="contain"
-            style={styles().socialImg}
-          />
-          <TouchableOpacity>
-            <Text style={styles().socialText}>Sign in with Google</Text>
-          </TouchableOpacity>
-        </View> */}
 
         <GoogleSigninButton
           style={styles().googleBtn}
