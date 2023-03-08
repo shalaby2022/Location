@@ -2,10 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {
   Image,
   ImageBackground,
-  ScrollView,
+  Platform,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -15,15 +14,24 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
-const image = {uri: 'https://reactjs.org/logo-og.png'};
-
 const SignIn = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    email: '',
+    id: '',
+    givenName: '',
+    familyName: '',
+    photo: '', // url
+    name: '', // full name
+  });
 
   const configureSignIn = () => {
     GoogleSignin.configure({
+      iosClientId:
+        '908868298572-761pm6h1o8odaq7l3oa4iih96frj05jt.apps.googleusercontent.com',
       webClientId:
-        '88062756294-gak5mrn4fcsp97t9vptn2p32qhrgrm53.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        Platform.OS === 'ios'
+          ? '908868298572-761pm6h1o8odaq7l3oa4iih96frj05jt.apps.googleusercontent.com'
+          : '908868298572-uklcdittcng62nqem2ad5f6cg9al2r2d.apps.googleusercontent.com',
       offlineAccess: false,
     });
   };
@@ -36,7 +44,15 @@ const SignIn = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      // setUser(userInfo)
+      setUser({
+        email: userInfo?.user?.email,
+        id: userInfo?.user?.id,
+        givenName: userInfo?.user?.givenName,
+        familyName: userInfo?.user?.familyName,
+        photo: userInfo?.user?.photo,
+        name: userInfo?.user?.name,
+      });
+
       console.log('userInfo', userInfo);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -59,10 +75,11 @@ const SignIn = () => {
       console.error(error.message);
     }
   };
+
   return (
     <View style={styles().container}>
       <ImageBackground
-        source={image}
+        source={require('../../assets/sky.jpeg')}
         resizeMode="cover"
         style={styles().image}
       />
@@ -95,6 +112,17 @@ const SignIn = () => {
           color={GoogleSigninButton.Color.Dark}
           onPress={signInWithGoogle}
         />
+
+        <View>
+          {user?.name ? (
+            <Text style={styles().userName}>Welcome {user.name}</Text>
+          ) : null}
+        </View>
+        <View style={styles().userImgWrapper}>
+          {user?.name ? (
+            <Image source={{uri: user.photo}} style={styles().userImage} />
+          ) : null}
+        </View>
       </View>
     </View>
   );

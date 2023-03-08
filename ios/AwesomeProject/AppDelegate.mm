@@ -1,5 +1,10 @@
 #import "AppDelegate.h"
 
+// for firebase and google sign in
+#import <FirebaseCore.h>
+#import <Firebase.h>
+#import <RNGoogleSignin.h>
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -18,9 +23,7 @@
 
 #import <react/config/ReactNativeConfig.h>
 
-// #import FirebaseCore
-#import <Firebase.h>
-#import <RNGoogleSignin.h>
+
 
 @interface AppDelegate () <RCTCxxBridgeDelegate, RCTTurboModuleManagerDelegate> {
   RCTTurboModuleManager *_turboModuleManager;
@@ -35,7 +38,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [FIRApp configure];
+  // [FIRApp configure];
   [GMSServices provideAPIKey:@"AIzaSyBZQl3WIxVqdz7_8dyQXJDS8QZiQsH0Yso"];
   RCTAppSetupPrepareApp(application);
 

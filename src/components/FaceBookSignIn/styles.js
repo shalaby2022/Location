@@ -71,20 +71,4 @@ export default () =>
       alignSelf: 'center',
       marginTop: 20,
     },
-    userName: {
-      color: '#03f',
-      fontSize: 16,
-      fontWeight: 'bold',
-      textAlign: 'center',
-      paddingVertical: 15,
-    },
-    userImage: {
-      width: 100,
-      height: 100,
-      borderRadius: 50,
-    },
-    userImgWrapper: {
-      width: '30%',
-      alignSelf: 'center',
-    },
   });
