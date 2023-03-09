@@ -5,6 +5,7 @@ import {
   Platform,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -95,6 +96,10 @@ const SignIn = () => {
           <Text style={styles().infoHeader}>Email:</Text>
           <TextInput style={styles().input} />
         </View>
+
+        <TouchableOpacity onPress={signOut} style={styles().socialWrapper}>
+          <Text style={styles().socialText}>SignOut</Text>
+        </TouchableOpacity>
 
         <GoogleSigninButton
           style={styles().googleBtn}

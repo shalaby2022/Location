@@ -4,7 +4,7 @@ export default () =>
   StyleSheet.create({
     container: {
       flex: 1,
-      paddingBottom: 7,
+      paddingBottom: 6,
     },
     image: {
       height: 330,
@@ -22,7 +22,7 @@ export default () =>
     headerWrapper: {
       alignItems: 'center',
       alignSelf: 'center',
-      paddingVertical: 15,
+      paddingVertical: 5,
     },
     signText: {
       color: '#03f',
@@ -31,7 +31,7 @@ export default () =>
     },
     inputsWrapper: {
       width: '100%',
-      marginBottom: 10,
+      marginBottom: 8,
     },
     infoHeader: {
       fontSize: 16,
@@ -51,21 +51,24 @@ export default () =>
     },
     socialWrapper: {
       marginTop: 20,
-      flexDirection: 'row',
       alignItems: 'center',
       borderWidth: 1,
       borderColor: '#ccc',
       borderRadius: 20,
-      width: '55%',
-      paddingVertical: 8,
+      width: '40%',
+      paddingVertical: 5,
       alignSelf: 'center',
+      backgroundColor: '#3c78de',
     },
     socialImg: {
       height: 25,
       width: 25,
       paddingHorizontal: 25,
     },
-    socialText: {},
+    socialText: {
+      fontWeight: 'bold',
+      color: '#fff',
+    },
     googleBtn: {
       width: 192,
       height: 48,
@@ -77,7 +80,7 @@ export default () =>
       fontSize: 16,
       fontWeight: 'bold',
       textAlign: 'center',
-      paddingVertical: 15,
+      paddingVertical: 10,
     },
     userImage: {
       width: 100,
