@@ -5,53 +5,34 @@ import {
   LoginButton,
   AccessToken,
   LoginManager,
-  GraphRequest,
+  Profile,
 } from 'react-native-fbsdk-next';
 
 const FbSignIn = () => {
   const [user, setUser] = useState({
-    firstname: '',
-    lastname: '',
     email: '',
-    avatar: '',
-    social_type: '',
+    imageURL: '',
+    name: '',
   });
-  const fbPermissionList = ['email', 'public_profile'];
 
-  const responseInfoCallback = async (error, result) => {
-    if (error) {
-      console.log(`Error fetching data:  ${error.toString()}`);
-    } else {
-      console.log(`Success fetching data: ${result.toString()}`);
-      setUser({
-        firstname: '',
-        lastname: result.last_name,
-        email: result.email,
-        avatar: result && result.picture ? result.picture.data.url : null,
-        social_type: 'facebook',
-      });
-    }
-  };
+  const fbPermissionList = ['email', 'public_profile'];
 
   const loginWithFacebook = () => {
     LoginManager.logInWithPermissions(fbPermissionList).then(result => {
       if (result.isCancelled) {
         console.log('login is cancelled.');
       } else {
-        AccessToken.getCurrentAccessToken().then(data => {
-          const userInfo = new GraphRequest(
-            '/me',
-            {
-              accessToken: data.accessToken.toString(),
-              parameters: {
-                fields: {
-                  string: 'email,name, first_name, last_name, picture',
-                },
-              },
-            },
-            responseInfoCallback,
-          );
-          new GraphRequestManager().addRequest(userInfo).start();
+        AccessToken.getCurrentAccessToken().then(token => {
+          console.log('token', token);
+        });
+
+        Profile.getCurrentProfile().then(profile => {
+          console.log('profile', profile);
+          setUser({
+            email: profile.email,
+            imageURL: profile && profile.imageURL ? profile.imageURL : null,
+            name: profile.name,
+          });
         });
       }
     });
@@ -92,7 +73,7 @@ const FbSignIn = () => {
         </View>
         <View style={styles().userImgWrapper}>
           {user?.name ? (
-            <Image source={{uri: user.photo}} style={styles().userImage} />
+            <Image source={{uri: user.imageURL}} style={styles().userImage} />
           ) : null}
         </View>
       </View>

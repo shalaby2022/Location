@@ -1,5 +1,9 @@
 #import "AppDelegate.h"
 
+// for fbsdk
+#import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
+#import <React/RCTLinkingManager.h> // <- Add This Import
+
 // for firebase and google sign in
 #import <FirebaseCore.h>
 #import <Firebase.h>
@@ -37,9 +41,14 @@
 
 @implementation AppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  // [FIRApp configure];
+          
+  [FIRApp configure];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+          didFinishLaunchingWithOptions:launchOptions];
+
   [GMSServices provideAPIKey:@"AIzaSyBZQl3WIxVqdz7_8dyQXJDS8QZiQsH0Yso"];
   RCTAppSetupPrepareApp(application);
 
@@ -66,7 +75,25 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  
   return YES;
+}
+
+// for fbsdk
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {
+    return YES;
+  }
+
+  if ([RCTLinkingManager application:app openURL:url options:options]) {
+    return YES;
+  }
+
+  return NO;
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
@@ -118,3 +145,5 @@
 #endif
 
 @end
+
+

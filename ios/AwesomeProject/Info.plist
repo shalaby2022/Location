@@ -23,29 +23,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.908868298572-761pm6h1o8odaq7l3oa4iih96frj05jt</string>
+				<string>fb1916746538723871</string>
+				<string>1916746538723871</string>
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleURLTypes</key>
-		<array>
-			<dict>
-			<key>CFBundleURLSchemes</key>
-				<array>
-					<string>1916746538723871</string>
-				</array>
-			</dict>
-		</array>
-	<key>FacebookAppID</key>
-	<string>1916746538723871</string>
-	<key>FacebookClientToken</key>
-	<string>ad197a7b2464aace9340a324553eb26e</string>
-	<key>FacebookDisplayName</key>
-	<string>com.awesomeproject</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -81,5 +65,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>FacebookAppID</key>
+	<string>1916746538723871</string>
+	<key>FacebookClientToken</key>
+	<string>ad197a7b2464aace9340a324553eb26e</string>
+	<key>FacebookDisplayName</key>
+	<string>com.awesomeproject</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 </dict>
 </plist>
