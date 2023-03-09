@@ -23,6 +23,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>1916746538723871</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -31,23 +37,14 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleURLTypes</key>
-		<array>
-			<dict>
-			<key>CFBundleURLSchemes</key>
-				<array>
-					<string>1916746538723871</string>
-				</array>
-			</dict>
-		</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>1916746538723871</string>
 	<key>FacebookClientToken</key>
 	<string>ad197a7b2464aace9340a324553eb26e</string>
 	<key>FacebookDisplayName</key>
 	<string>com.awesomeproject</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
