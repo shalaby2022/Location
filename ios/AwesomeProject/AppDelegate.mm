@@ -11,6 +11,7 @@
 
 #import <React/RCTAppSetupUtils.h>
 
+// for google maps
 #import <GoogleMaps/GoogleMaps.h>
 
 #if RCT_NEW_ARCH_ENABLED

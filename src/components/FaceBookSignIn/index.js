@@ -1,12 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  ImageBackground,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Image, ImageBackground, Text, TextInput, View} from 'react-native';
 import styles from './styles';
 import {
   LoginButton,
