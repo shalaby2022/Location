@@ -279,6 +279,8 @@ dependencies {
     // firebase analytics
     implementation 'com.google.firebase:firebase-analytics:17.3.0'
 
+    implementation 'com.google.firebase:firebase-inappmessaging-display'
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }
@@ -330,4 +332,4 @@ def isNewArchitectureEnabled() {
     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
 
-apply plugin: 'com.google.gms.google-services' // <--- this should be the last line
+// apply plugin: 'com.google.gms.google-services' // <--- this should be the last line

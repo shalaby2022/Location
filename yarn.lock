@@ -1319,6 +1319,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-3.0.5.tgz#de6a0519277133be46df556f09c5691fe1ed8eaf"
   integrity sha512-dpigB7ni085rCBi85rIHNrs8hcKaLtDQVxNm1zgXrYZNO7XKN/GSL3AjYBBG7z9pG6qNyQNl4Xge8jWUCudTyQ==
 
+"@react-native-firebase/analytics@16.7.0":
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-16.7.0.tgz#367487b2961f360c0e6bd3c9bbf4697d4e73e66c"
+  integrity sha512-oLnmChS7w/iuGPiHDxVzxJy60pWD+HjhEGLRdENaEMrF2SA+AQtfJtqvZnGGKPecxZIhUID325xZLBuABIkeBQ==
+
 "@react-native-firebase/app@16.7.0":
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-16.7.0.tgz#cb6bab9dab836de5eb9f7a608b1d067a2b4783b2"
@@ -1327,6 +1332,11 @@
     "@expo/config-plugins" "^5.0.4"
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
+
+"@react-native-firebase/in-app-messaging@16.7.0":
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/in-app-messaging/-/in-app-messaging-16.7.0.tgz#c4869a133744e92f93aeb63dfe323bb9b7821aa0"
+  integrity sha512-M/ht0cVD2LpJIzkuD7Uf++HUxFYw23+4TyuZ9ZW/WW71sD0jEKSZ9a0Wd9cAy1LH50kqjxJ2fJk3ALxk5wYTig==
 
 "@react-native-firebase/installations@16.7.0":
   version "16.7.0"
@@ -2744,15 +2754,15 @@ escape-html@~1.0.3:
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==
 
+escape-string-regexp@2.0.0, escape-string-regexp@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
+  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
+
 escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
-
-escape-string-regexp@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
-  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
 escape-string-regexp@^4.0.0:
   version "4.0.0"
@@ -3634,7 +3644,7 @@ internal-slot@^1.0.3, internal-slot@^1.0.4:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-invariant@*, invariant@^2.2.4:
+invariant@*, invariant@2.2.4, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5799,6 +5809,19 @@ react-native-maps@^1.4.0:
   integrity sha512-asP6oVx9uF4E9U22j40q0AcSJ4v3hPBPCg1kPdlbckGXGj+z8dwwdPkQi3hUpl94odlR//v60Sw6PAEYv8zSxw==
   dependencies:
     "@types/geojson" "^7946.0.8"
+
+react-native-signature-canvas@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-signature-canvas/-/react-native-signature-canvas-4.5.0.tgz#374cd603d95eee80dbd0728b8ef9e77616ea4511"
+  integrity sha512-xOwuHNqKJHqWZ+Or3CjjZUyuNgDDLm7KWFDMwSUNMYLlUPgl+j6irytTG4lv4acROBAuO2PebFWgNcA+aHIzug==
+
+react-native-webview@^11.26.1:
+  version "11.26.1"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.26.1.tgz#658c09ed5162dc170b361e48c2dd26c9712879da"
+  integrity sha512-hC7BkxOpf+z0UKhxFSFTPAM4shQzYmZHoELa6/8a/MspcjEP7ukYKpuSUTLDywQditT8yI9idfcKvfZDKQExGw==
+  dependencies:
+    escape-string-regexp "2.0.0"
+    invariant "2.2.4"
 
 react-native@0.68.1:
   version "0.68.1"

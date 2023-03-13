@@ -36,6 +36,8 @@ target 'AwesomeProject' do
   
   pod 'react-native-fbsdk-next', :path => '../node_modules/react-native-fbsdk-next'
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'AwesomeProjectTests' do
     inherit! :complete
     # Pods for testing

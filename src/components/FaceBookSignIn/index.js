@@ -15,7 +15,7 @@ const FbSignIn = () => {
     name: '',
   });
 
-  const fbPermissionList = ['email', 'public_profile'];
+  const fbPermissionList = ['email', 'openid', 'public_profile'];
 
   const loginWithFacebook = () => {
     LoginManager.logInWithPermissions(fbPermissionList).then(result => {
