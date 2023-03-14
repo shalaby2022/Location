@@ -38,6 +38,10 @@ target 'AwesomeProject' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  pod 'react-native-html-to-pdf', :path => '../node_modules/react-native-html-to-pdf'
+
   target 'AwesomeProjectTests' do
     inherit! :complete
     # Pods for testing

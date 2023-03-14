@@ -5,6 +5,7 @@ import InAppMsg from './src/components/FBmessaging';
 import SignIn from './src/components/GoogleSignIn';
 import Location from './src/components/Location';
 import Locations from './src/components/Locations';
+import CreateSignature from './src/components/Signature';
 import Tracking from './src/components/Tracking';
 
 const App = () => {
@@ -15,7 +16,8 @@ const App = () => {
       {/* <Tracking /> */}
       {/* <SignIn /> */}
       {/* <FbSignIn /> */}
-      <InAppMsg />
+      {/* <InAppMsg /> */}
+      <CreateSignature />
     </SafeAreaView>
   );
 };
