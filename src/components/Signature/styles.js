@@ -1,6 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
-const Width = Dimensions.get('window').width;
-const Height = Dimensions.get('window').height;
+import {StyleSheet} from 'react-native';
 
 export default () =>
   StyleSheet.create({
@@ -17,10 +15,10 @@ export default () =>
       alignItems: 'center',
       marginTop: 15,
     },
-    // image: {
-    //   width: 335,
-    //   height: 114,
-    // },
+    image: {
+      width: 335,
+      height: 114,
+    },
     previewText: {
       color: '#FFF',
       fontSize: 14,
@@ -41,9 +39,18 @@ export default () =>
       width: '100%',
       alignItems: 'center',
     },
-    pdf: {
-      flex: 1,
-      width: Width,
-      height: Height,
+    convertWrapper: {
+      width: '50%',
+      backgroundColor: '#00f',
+      paddingVertical: 10,
+      borderRadius: 10,
+      alignSelf: 'center',
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    convertText: {
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 16,
     },
   });

@@ -61,8 +61,10 @@ const CreateSignature = () => {
         confirmText="Save"
       />
       {sign && (
-        <TouchableOpacity onPress={() => createPDF()}>
-          <Text>Convert PDF</Text>
+        <TouchableOpacity
+          onPress={() => createPDF()}
+          style={styles().convertWrapper}>
+          <Text style={styles().convertText}>Convert PDF</Text>
         </TouchableOpacity>
       )}
     </View>
